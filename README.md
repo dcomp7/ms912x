@@ -1,25 +1,23 @@
-# ms912x driver for Linux
+# ms912x driver for Linux (kernel 6.8 beta)
 
-Linux kernel driver for MacroSilicon USB to VGA/HDMI adapter.
+Linux kernel driver for MacroSilicon USB to VGA/HDMI adapter. VID/PID is 534d:6021. Device is USB2.0
 
 There are two variants:
  - VID/PID is 534d:6021. Device is USB 2
  - VID/PID is 345f:9132. Device is USB 3
 
-For kernel 6.1 checkout branch kernel-6.1
 
-TODOs:
+Setup:
 
-- Detect connector type (VGA, HDMI, etc...)
-- More resolutions
-- Error handling
-- Is RGB to YUV conversion needed?
+```
+sudo apt install -y build-essential
+make clean
+make all -j
+sudo modprobe drm_shmem_helper
+sudo insmod ms912x.ko
+```
 
 ## Development 
 
 Driver is written by analyzing wireshark captures of the device.
-
-## DKMS
-
-Run `sudo dkms install .`
 
