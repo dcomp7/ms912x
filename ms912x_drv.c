@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
+#include <linux/version.h>
 #include <linux/module.h>
 
 #include <drm/drm_atomic_helper.h>
@@ -7,7 +8,11 @@
 #include <drm/drm_damage_helper.h>
 #include <drm/drm_drv.h>
 #include <drm/drm_fb_helper.h>
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 11, 0))
+#include <drm/drm_fbdev_generic.h>
+#else
 #include <drm/drm_fbdev_ttm.h>
+#endif
 #include <drm/drm_file.h>
 #include <drm/drm_gem_atomic_helper.h>
 #include <drm/drm_gem_framebuffer_helper.h>
@@ -275,7 +280,11 @@ static int ms912x_usb_probe(struct usb_interface *interface,
 	if (ret)
 		goto err_free_request_1;
 
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 11, 0))
+	drm_fbdev_generic_setup(dev, 0);
+#else
 	drm_fbdev_ttm_setup(dev, 0);
+#endif
 
 	return 0;
 
