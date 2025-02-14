@@ -21,3 +21,6 @@ sudo insmod ms912x.ko
 
 Driver is written by analyzing wireshark captures of the device.
 
+## Forked from
+
+rhgndf/ms912x
