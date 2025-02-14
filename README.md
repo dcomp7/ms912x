@@ -18,4 +18,4 @@ sudo insmod ms912x.ko
 ```
 ## Forked from
 
-rhgndf/ms912x
+[rhgndf/ms912x](https://github.com/rhgndf/ms912x)
